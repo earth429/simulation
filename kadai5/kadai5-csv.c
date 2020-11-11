@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 
-#define STEP_NUM 10
+#define STEP_NUM 20
 
 void func(double *f, double u)
 {
@@ -57,39 +57,35 @@ void RK(double xi, double yi, double *xi1, double *yi1, double h)
 // ネイピア数(2.71828182846)
 int main(void) {
 
-    double tn[STEP_NUM];
-    double un[STEP_NUM];
-    double tn_H[STEP_NUM];
-    double un_H[STEP_NUM];
-    double tn_R[STEP_NUM];
-    double un_R[STEP_NUM];
-    tn[0] = 0.0; // t0
-    un[0] = 1.0; // u0
+    double tn_E[STEP_NUM + 2];
+    double un_E[STEP_NUM + 2];
+    double tn_H[STEP_NUM + 1];
+    double un_H[STEP_NUM + 1];
+    double tn_R[STEP_NUM + 2];
+    double un_R[STEP_NUM + 2];
+    tn_E[0] = 0.0; // t0
+    un_E[0] = 1.0; // u0
     tn_H[0] = 0.0; // t0
     un_H[0] = 1.0; // u0
     tn_R[0] = 0.0; // t0
     un_R[0] = 1.0; // u0
-    double h = 0.1;
+    double h = 0.05;
 
     int i;
-    /*for (i = 0;i < STEP_NUM; i++) {
-        Euler(tn[i], un[i], &tn[i + 1], &un[i + 1], h);
-        printf("%.14lf,%.14lf\n", tn[i + 1], un[i + 1]);
+    for (i = 0;i <= STEP_NUM; i++) {
+        Euler(tn_E[i], un_E[i], &tn_E[i + 1], &un_E[i + 1], h);
+        printf("%.14lf,%.14lf\n", tn_E[i], un_E[i]);
     }
-    puts("");
 
-    h = 0.1;
-    for (i = 0;i < STEP_NUM; i++) {
+    /*for (i = 0;i <= STEP_NUM; i++) {
         Heun(tn_H[i], un_H[i], &tn_H[i + 1], &un_H[i + 1], h);
-        printf("%.14lf,%.14lf\n", tn_H[i + 1], un_H[i + 1]);
-    }
-    puts("");
-
-    h = 0.1;*/
-    for (i = 0;i < STEP_NUM; i++) {
+        printf("%.14lf,%.14lf\n", tn_H[i], un_H[i]);
+    }*/
+    
+    /*for (i = 0;i <= STEP_NUM; i++) {
         RK(tn_R[i], un_R[i], &tn_R[i + 1], &un_R[i + 1], h);
-        printf("%.14lf,%.14lf\n", tn_R[i + 1], un_R[i + 1]);
-    }
+        printf("%.14lf,%.14lf\n", tn_R[i], un_R[i]);
+    }*/
 
     return 0;
 }
