@@ -35,7 +35,7 @@ void Heun(double xi, double yi,  double *xi1, double *yi1, double h)
 // ルンゲ・クッタ法
 void RK(double xi, double yi, double *xi1, double *yi1, double h)
 {
-    double k1,k2,k3,k4;
+    double k1, k2, k3, k4;
     double f;
 
     *xi1 = xi + h;
@@ -56,19 +56,23 @@ void RK(double xi, double yi, double *xi1, double *yi1, double h)
 }
 // ネイピア数(2.71828182846)
 int main(void) {
-
-    double tn_E[STEP_NUM + 2];
+    // 値を格納する配列
+    double tn_E[STEP_NUM + 2]; // for文内でSTEP_NUM + 2の領域までアクセスする
     double un_E[STEP_NUM + 2];
-    double tn_H[STEP_NUM + 1];
-    double un_H[STEP_NUM + 1];
+    double tn_H[STEP_NUM + 2];
+    double un_H[STEP_NUM + 2];
     double tn_R[STEP_NUM + 2];
     double un_R[STEP_NUM + 2];
+
+    // 初期値
     tn_E[0] = 0.0; // t0
     un_E[0] = 1.0; // u0
-    tn_H[0] = 0.0; // t0
-    un_H[0] = 1.0; // u0
-    tn_R[0] = 0.0; // t0
-    un_R[0] = 1.0; // u0
+    tn_H[0] = 0.0;
+    un_H[0] = 1.0;
+    tn_R[0] = 0.0;
+    un_R[0] = 1.0;
+
+    // 刻み幅
     double h = 0.05;
 
     int i;

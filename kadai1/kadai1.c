@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <math.h>
 
-void func(double *f, double x)
-{
+#define DIV_NUM 32768 // 分割数
+
+void func(double *f, double x) {
     *f = 1 / cos(x);
 }
 
@@ -54,13 +55,23 @@ int main(void)
     double ans;
     double kaisekikai = 0.549306144; // 1/2 loge 3
 
-    printf("台形公式で数値積分しました。解析解の値は%fです。\n", kaisekikai);
+    printf("台形公式で数値積分しました。解析解の値は%.9lfです。\n", kaisekikai);
     
-    for (n = 1; n <= 512; n = n * 2) {
+    /*n = 1;
+    ans = 0;
+    while(fabs(ans - kaisekikai) >= 0.0000000001) {
         ans = 0;
         Trapezoidal(n, &ans);
-        printf("n=%dのときSnは%fです。", n, ans);
-        printf("解析解との誤差は%fです。\n", fabs(ans - kaisekikai)); // 誤差=|(計算結果) - (解析解)|
+        printf("n=%dのときSnは%.9lfです。", n, ans);
+        printf("解析解との誤差は%.9lfです。\n", fabs(ans - kaisekikai)); // 誤差=|(計算結果) - (解析解)|
+        n = n * 2;
+    }*/
+
+    for (n = 1; n <= DIV_NUM; n = n * 2) {
+        ans = 0;
+        Trapezoidal(n, &ans);
+        printf("n=%dのときSnは%.9lfです。", n, ans);
+        printf("解析解との誤差は%.9lfです。\n", fabs(ans - kaisekikai)); // 誤差=|(計算結果) - (解析解)|
     }
 
     return 0;

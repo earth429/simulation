@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <math.h>
 
+#define DIV_NUM 32 // 分割数
+
 void float_func(float *f, float x)
 {
     *f = sin(x);
@@ -71,7 +73,7 @@ int main(void) {
     printf("シンプソンの公式で数値積分しました。真値は%fです。\n", double_true_value);
 
     puts("---float型---");
-    for (n = 2; n <= 32; n = n * 2) {
+    for (n = 2; n <= DIV_NUM; n = n * 2) {
         float_h = (float_b - float_a) / n;
         float_ans = 0;
         float_Simpson(n, &float_ans, float_a, float_b, float_h);
@@ -80,7 +82,7 @@ int main(void) {
     }
 
     puts("---double型---");
-    for (n = 2; n <= 32; n = n * 2) {
+    for (n = 2; n <= DIV_NUM; n = n * 2) {
         double_h = (double_b - double_a) / n;
         double_ans = 0;
         double_Simpson(n, &double_ans, double_a, double_b, double_h);
