@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 
-#define DIV_NUM 32 // 分割数
+#define DIV_NUM 32768 // 分割数
 
 void float_func(float *f, float x)
 {
