@@ -24,9 +24,9 @@ void SODE(double x0, double y1_0, double y2_0, double *x1, double *y1, double *y
 }
 
 int main(void) {
-    double x[5];
-    double y1[5];
-    double y2[5];
+    double x[5 + 1];
+    double y1[5 + 1];
+    double y2[5 + 1];
     // 初期値設定
     x[0] = 0;
     y1[0] = 4;
