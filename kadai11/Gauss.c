@@ -5,7 +5,7 @@
 #define ROWS 10 //列(縦)
 
 // 前進消去
-int FowardElimination(int A[][]) {
+int ForwardElimination(int A[][]) {
     int i, j;
 
     for (i = 0; i < COLS; i++) {
@@ -13,6 +13,10 @@ int FowardElimination(int A[][]) {
 
         }
     }
+}
+
+int BackwardSubstitution() {
+    
 }
 
 
