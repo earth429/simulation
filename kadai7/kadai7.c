@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define STEPS 800
+#define STEPS 1000
 
 double f(double v) {
     return v; 
@@ -39,9 +39,9 @@ int main(void) {
     v[0] = v0;
 
     Euler(h, t, y, v, k, l, STEPS);
-    printf("t0=%.1lf,y0=%.1lf,v0=%.1lf\n", t0, y0, v0);
-    printf("k=%.1lf,l=%.1lf\n", k, l);
-    printf("t,y,v\n");
+    //printf("t0=%.1lf,y0=%.1lf,v0=%.1lf\n", t0, y0, v0);
+    //printf("k=%.1lf,l=%.1lf\n", k, l);
+    //printf("t,y,v\n");
     for (i = 0; i < STEPS; i++) {
         printf("%lf,%lf,%lf\n", t[i], y[i], v[i]);
     }

@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-#define STEPS 15
+#define STEPS 200
 
 // dx/dt
 double xp(double vx) {
@@ -50,7 +50,7 @@ void Heun(double h, double t[], double x[], double vx[], double y[], double vy[]
 int main(void) {
     int i;
     double h = 0.001;
-    double b = 10.0;
+    double b = 1.0;
     double t[STEPS];
     double vx[STEPS];
     double x[STEPS];
