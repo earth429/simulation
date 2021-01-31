@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-#define STEPS 200
+#define STEPS 10000
 
 // dx/dt
 double xp(double vx) {
@@ -50,7 +50,7 @@ void Heun(double h, double t[], double x[], double vx[], double y[], double vy[]
 int main(void) {
     int i;
     double h = 0.001;
-    double b = 1.0;
+    double b = 10.0;
     double t[STEPS];
     double vx[STEPS];
     double x[STEPS];
@@ -70,8 +70,8 @@ int main(void) {
     vy[0] = vy0;
 
     Heun(h, t, x, vx, y, vy, b, STEPS);
-    printf("t0=%.1lf,x0=%.1lf,vx0=%.1lf,y0=%.1lf,vy0=%.1lf\n", t0, x0, vx0, y0, vy0);
-    printf("t,x,vx,y,vy\n");
+    //printf("t0=%.1lf,x0=%.1lf,vx0=%.1lf,y0=%.1lf,vy0=%.1lf\n", t0, x0, vx0, y0, vy0);
+    //printf("t,x,vx,y,vy\n");
     for (i = 0; i < STEPS; i++) {
         printf("%lf,%lf,%lf,%lf,%lf\n",t[i], x[i], vx[i], y[i], vy[i]);
     }

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 
-#define STEPS 15
+#define STEPS 5000
 
 // dx/dt
 double xp(double x_dash) {
@@ -10,8 +10,8 @@ double xp(double x_dash) {
 }
 
 // dVx/dt
-double vxp(double Vx, double b) {
-    double Vx_dash = b * Vx; // qB/m = 2.0
+double vxp(double Vy, double b) {
+    double Vx_dash = b * Vy; // qB/m = 2.0
     return Vx_dash;
 }
 
@@ -22,8 +22,8 @@ double yp(double y_dash) {
 }
 
 // dVy/dt
-double vyp(double Vy, double b) {
-    double Vy_dash = b * Vy; // qB/m = 2.0
+double vyp(double Vx, double b) {
+    double Vy_dash = - b * Vx; // qB/m = 2.0
     return Vy_dash;
 }
 
@@ -70,9 +70,9 @@ void Heun(double t[], double x[], double vx[], double y[], double vy[], double z
 
 int main(void) {
     int i;
-    double h = 0.1; // 0.1より小さいと誤差が少なくていい
-    double b = 0.5;
-    double e = 1.0;
+    double h = 0.01; // 0.1より小さいと誤差が少なくていい
+    double b = 1.0;
+    double e = 2.0;
     double t0 = 0.0;
     double x0 = 0.1;
     double vx0 = 0.0;
@@ -92,8 +92,8 @@ int main(void) {
     z[0] = z0;
     vz[0] = vz0;
 
-    printf("t0=%.1lf,x0=%.1lf,vx0=%.1lf,y0=%.1lf,vy0=%.1lf\n", t0, x0, vx0, y0, vy0);
-    printf("t,x,vx,y,vy,z,vz\n");
+    //printf("t0=%.1lf,x0=%.1lf,vx0=%.1lf,y0=%.1lf,vy0=%.1lf\n", t0, x0, vx0, y0, vy0);
+    //printf("t,x,vx,y,vy,z,vz\n");
     for (i = 0; i < STEPS; i++) {
         Heun(t, x, vx, y, vy, z, vz, h, b, e, i);
         printf("%lf,%lf,%lf,%lf,%lf,%lf,%lf\n", t[i], x[i], vx[i], y[i], vy[i], z[i], vz[i]);
