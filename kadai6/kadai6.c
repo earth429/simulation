@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 
-#define STEPS 100
+#define STEPS 10
 
 double f1(double y1, double y2, double a, double c) {
     return a * y1 - c * y1 * y2;
@@ -32,7 +32,7 @@ int main(void) {
     double a, b, c, d;
 
     x0 = 0.0 ,y01 = 2.0, y02 = 2.0;
-    a = 3.0, b = 3.0, c = 1.0; d = 1.0;
+    a = 1.0, b = 1.0, c = 1.0; d = 1.0;
 
     x[0] = x0;
     y1[0] = y01;
@@ -53,9 +53,9 @@ int main(void) {
     // a = 3, b = 3, c = 1, d = 1
     //y2 < a / c, y1 < b / d
     Euler(h, x, y1, y2, a, b, c, d, STEPS);
-    //printf("x0=%.1lf,y01=%.1lf,y02=%.1lf\n", x0, y01, y02);
-    //printf("a=%.1lf,b=%.1lf,c=%.1lf,d=%.1lf\n", a, b, c, d);
-    //printf("x,y1,y2\n");
+    printf("x0=%.1lf,y01=%.1lf,y02=%.1lf\n", x0, y01, y02);
+    printf("a=%.1lf,b=%.1lf,c=%.1lf,d=%.1lf\n", a, b, c, d);
+    printf("x,y1,y2\n");
     for (i = 0; i < STEPS; i++) {
         printf("%.10lf,%.10lf,%.10lf\n", x[i], y1[i], y2[i]);
     }

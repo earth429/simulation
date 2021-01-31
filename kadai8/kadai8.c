@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-#define STEPS 1500
+#define STEPS 10
 
 double f(double I) {
     return I; 
@@ -31,10 +31,9 @@ void Heun(double h, double t[], double Q[], double I[], double r, double l,doubl
 int main(void) {
     int i;
     double h = 1 / 64.0;
-    double r;
+    double r = 0.0;
     double l = 10.0;
     double c = 0.3;
-    r = 2 * sqrt(l / c);
     double t[STEPS];
     double Q[STEPS];
     double I[STEPS];
@@ -48,9 +47,9 @@ int main(void) {
     I[0] = I0;
 
     Heun(h, t, Q, I, r, l, c, STEPS);
-    //printf("t0=%.1lf,Q0=%.1lf,I0=%.1lf\n", t0, Q0, I0);
-    //printf("r=%.1lf,l=%.1lf,c=%.1lf\n", r, l, c);
-    //printf("t,Q,I\n");
+    printf("t0=%.1lf,Q0=%.1lf,I0=%.1lf\n", t0, Q0, I0);
+    printf("r=%.1lf,l=%.1lf,c=%.1lf\n", r, l, c);
+    printf("t,Q,I\n");
     for (i = 0; i < STEPS; i++) {
         printf("%lf,%lf,%lf\n",t[i], Q[i], I[i]);
     }
