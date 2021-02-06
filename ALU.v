@@ -22,12 +22,16 @@ module ALU (
 
         // アキュムレータとの加算
         else if (INST >= 4'b0100 && INST <= 4'b0101)
+        begin
             {C, OUT_DATA} <= IN_DATA1 + IN_DATA2;
+        end 
         
         // アキュムレータからの減算
         else if (INST >= 4'b0110 && INST <= 4'b0111)
+        begin
             {C, OUT_DATA} <= IN_DATA1 - INDATA2;
-
+        end
+            
         // 論理反転
         else if (INST >= 4'b1000 && INST <= 4'b1001)
         begin
