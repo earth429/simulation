@@ -19,7 +19,7 @@ int main(void){
     leastSquares(x, y, ans);
     printf("%d次多項式で近似\n",SIZE - 1);
     for(i = 0; i < SIZE;i++){
-        printf("a%d = %lf\n", i, ans[i]);
+        printf("a%d = %lf\n", i + 1, ans[i]);
     }
     return 0;
 }
@@ -51,44 +51,44 @@ void leastSquares(double x[DATA], double y[DATA], double ans[SIZE]) {
 void GaussEelimination(double parameters[SIZE][SIZE], double answer[SIZE], double x[SIZE]) {
     int i, j, k;
     double pivot;
-    double temp_p[SIZE][SIZE];
-    double temp_a[SIZE];
+    double tmp_p[SIZE][SIZE];
+    double tmp_a[SIZE];
     //copy
     for (i = 0; i < SIZE; i++) {
         for (j = 0; j < SIZE; j++) {
-            temp_p[i][j] = parameters[i][j];
+            tmp_p[i][j] = parameters[i][j];
         }
-        temp_a[i] = answer[i];
+        tmp_a[i] = answer[i];
     }
 
     for (i = 0; i < SIZE - 1; i++) {
         //pivot選択
         if (PIVOTING) {
-            Translation(temp_p, temp_a, i);
+            Translation(tmp_p, tmp_a, i);
         }
-        pivot = temp_p[i][i];
+        pivot = tmp_p[i][i];
         for (j = 1 + i; j < SIZE; j++) {
-            double m = temp_p[j][i] / pivot;
+            double m = tmp_p[j][i] / pivot;
             //parameter消去
             for (k = 0; k < SIZE; k++) {
-                temp_p[j][k] = temp_p[j][k] - temp_p[i][k] * m;
+                tmp_p[j][k] = tmp_p[j][k] - tmp_p[i][k] * m;
             }
             //answer更新
-            temp_a[j] = temp_a[j] - temp_a[i] * m;
+            tmp_a[j] = tmp_a[j] - tmp_a[i] * m;
         }
     }
     
     for (i = SIZE - 1; i >= 0; i--) {
-        double m = temp_a[i];
+        double m = tmp_a[i];
         for (j = i + 1; j < SIZE; j++) {
-            m -= temp_p[i][j] * x[j];
+            m -= tmp_p[i][j] * x[j];
         }
-        x[i] = m / temp_p[i][i];
+        x[i] = m / tmp_p[i][i];
     }
 }
 
 void Translation(double parameters[SIZE][SIZE], double answer[SIZE],int pivot) {
-    double temp_a;
+    double tmp_a;
     int i;
     double max = fabs(parameters[pivot][pivot]);
     int index = pivot;
@@ -101,12 +101,12 @@ void Translation(double parameters[SIZE][SIZE], double answer[SIZE],int pivot) {
     }
     //入れ替え
     for(i = 0; i < SIZE;i ++) {
-        double temp_p;
-        temp_p = parameters[pivot][i];
+        double tmp_p;
+        tmp_p = parameters[pivot][i];
         parameters[pivot][i] = parameters[index][i];
-        parameters[index][i] = temp_p;
+        parameters[index][i] = tmp_p;
     }
-    temp_a = answer[pivot];
+    tmp_a = answer[pivot];
     answer[pivot] = answer[index];
-    answer[index] = temp_a;
+    answer[index] = tmp_a;
 }

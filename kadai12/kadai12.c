@@ -3,10 +3,11 @@
 #include <math.h>
 
 #define SIZE 3
-#define PIVOTING 1
+#define PIVOTING 1 // ピボット0がなし，1があり
 
 void GaussEelimination(double parameters[SIZE][SIZE], double answer[SIZE], double x[SIZE]);
 void Translation(double parameters[SIZE][SIZE], double answer[SIZE], int pivot);
+
 int main(void){
     int i,j;
     double parameters[SIZE][SIZE] = {
@@ -18,60 +19,62 @@ int main(void){
     double x[SIZE];
     GaussEelimination(parameters, answer, x);
     for (i = 0; i < SIZE; i++){
-        printf("x%d = ",i);
+        printf("x%d = ",i + 1);
         printf("%lf\n", x[i]);
     }
 
-    printf("解の確認\n");
-    printf("右辺\t計算した右辺\n");
+    puts("解の確認");
+    printf("ans\t\tcheck\n");
     for (i = 0; i < SIZE; i++){
-        double temp = 0;
+        double tmp = 0;
         for (j = 0; j < SIZE; j++){
-            temp += parameters[i][j] * x[j];
+            tmp += parameters[i][j] * x[j];
         }
-        printf("%lf\t%lf\n", answer[i], temp);
+        printf("%lf\t%lf\n", answer[i], tmp);
     }
 }
+
 void GaussEelimination(double parameters[SIZE][SIZE], double answer[SIZE], double x[SIZE]){
     int i,j,k;
     double pivot;
-    double tempp[SIZE][SIZE];
-    double tempa[SIZE];
+    double tmpp[SIZE][SIZE];
+    double tmpa[SIZE];
     //copy
     for (i = 0; i < SIZE; i++){
         for(j = 0; j < SIZE; j++){
-            tempp[i][j] = parameters[i][j];
+            tmpp[i][j] = parameters[i][j];
         }
-        tempa[i] = answer[i];
+        tmpa[i] = answer[i];
     }
 
     for (i = 0; i < SIZE - 1; i++){
         //pivot選択
-        if(PIVOTING)
-            Translation(tempp, tempa, i);
-        pivot = tempp[i][i];
+        if(PIVOTING) {
+            Translation(tmpp, tmpa, i);
+        }
+        pivot = tmpp[i][i];
         for (j = 1 + i; j < SIZE; j++){
-            double m = tempp[j][i] / pivot;
+            double m = tmpp[j][i] / pivot;
             //parameter消去
             for (k = 0; k < SIZE; k++){
-                tempp[j][k] = tempp[j][k] - tempp[i][k] * m;
+                tmpp[j][k] = tmpp[j][k] - tmpp[i][k] * m;
             }
             //answer更新
-            tempa[j] = tempa[j] - tempa[i] * m;
+            tmpa[j] = tmpa[j] - tmpa[i] * m;
         }
     }
     
     for (i = SIZE - 1; i >= 0; i--){
-        double m = tempa[i];
+        double m = tmpa[i];
         for (j = i + 1; j < SIZE; j++){
-            m -= tempp[i][j] * x[j];
+            m -= tmpp[i][j] * x[j];
         }
-        x[i] = m / tempp[i][i];
+        x[i] = m / tmpp[i][i];
     }
 }
 
 void Translation(double parameters[SIZE][SIZE], double answer[SIZE],int pivot){
-    double tempa;
+    double tmpa;
     int i;
     double max = fabs(parameters[pivot][pivot]);
     int index = pivot;
@@ -85,13 +88,12 @@ void Translation(double parameters[SIZE][SIZE], double answer[SIZE],int pivot){
 
     //入れ替え
     for(i = 0; i < SIZE;i ++){
-        double tempp;
-        tempp = parameters[pivot][i];
+        double tmpp;
+        tmpp = parameters[pivot][i];
         parameters[pivot][i] = parameters[index][i];
-        parameters[index][i] = tempp;
+        parameters[index][i] = tmpp;
     }
-    tempa = answer[pivot];
+    tmpa = answer[pivot];
     answer[pivot] = answer[index];
-    answer[index] = tempa;
-
+    answer[index] = tmpa;
 }

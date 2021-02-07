@@ -10,6 +10,7 @@
 void GaussEelimination(double parameters[SIZE][SIZE], double answer[SIZE], double x[SIZE]);
 void Translation(double parameters[SIZE][SIZE], double answer[SIZE], int pivot);
 void leastSquares(double x[DATA], double y[DATA], double ans[SIZE]);
+
 int main(void){
     int i;
     double x[DATA] = {0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6};
@@ -18,7 +19,17 @@ int main(void){
     leastSquares(x, y, ans);
     printf("%d次多項式で近似\n",SIZE - 1);
     for(i = 0; i < SIZE;i++){
-        printf("a%d = %lf\n", i, ans[i]);
+        switch (i) {
+            case 0:
+                printf("a = %lf\n", ans[i]);
+                break;
+            case 1:
+                printf("b = %lf\n", ans[i]);
+                break;
+            case 2:
+                printf("c = %lf\n", ans[i]);
+                break;
+        }
     }
     return 0;
 }
@@ -44,8 +55,8 @@ void leastSquares(double x[DATA], double y[DATA], double ans[SIZE]){
     }
     //連立を解く
     GaussEelimination(parameters, answer, ans);
-
 }
+
 void GaussEelimination(double parameters[SIZE][SIZE], double answer[SIZE], double x[SIZE]){
     int i,j,k;
     double pivot;
