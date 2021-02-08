@@ -47,10 +47,12 @@ double RandomWalk(int step, double rate){
     double x = 0;
     int i;
     for (i = 0; i < step;i++) {
-        if((double)rand() / RAND_MAX < rate)
+        if((double)rand() / RAND_MAX < rate) {
             x += L;
-        else 
+        }
+        else {
             x -= L;
+        }
     }
     return x;
 }
